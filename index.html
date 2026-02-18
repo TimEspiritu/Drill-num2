@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root{
+            --bg1: #ff9a9e;
+            --bg2: #f6d365;
+            --accent1: #7bdff6;
+            --accent2: #9be15d;
+            --card-bg: rgba(255,255,255,0.9);
+            --glass: rgba(255,255,255,0.6);
+        }
+        html,body{
+            height:100%;
+            margin:0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg1) 0%, #fbc2eb 40%, #a18cd1 100%);
+            transition: background 0.6s ease;
+        }
+        .calculator-box {
+            width:360px;
+            background: linear-gradient(180deg, var(--card-bg), rgba(255,255,255,0.85));
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(16,24,40,0.15);
+            border: 6px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        .calculator-box::before{
+            content:"";
+            position:absolute;
+            inset:-6px;
+            border-radius:20px;
+            background: linear-gradient(45deg, #ff9a9e, #f6d365, #a1c4fd, #c2e9fb);
+            z-index:-1;
+        }
+        h1{
+            margin:0 0 12px 0;
+            font-size:1.6rem;
+            background: linear-gradient(90deg,#ff7a7a,#ffd76b,#7be6ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        input, select, button {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 10px;
+            border: 2px solid rgba(0,0,0,0.06);
+            background: var(--glass);
+            outline: none;
+            transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+            font-size: 1rem;
+        }
+        input:focus, select:focus{
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-color: rgba(0,0,0,0.12);
+        }
+        select{appearance:none}
+        button {
+            background: linear-gradient(90deg,#5ee7df,#b490da);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight:600;
+            letter-spacing: .2px;
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(180,110,230,0.18);
+        }
+        #result{
+            margin-top:12px;
+            padding: 12px 14px;
+            text-align:center;
+            border-radius: 10px;
+            font-weight:700;
+            color:#fff;
+            background: linear-gradient(90deg,#f6d365,#fda085);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            min-height:36px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:1.05rem;
+        }
+        @media (max-width:420px){
+            .calculator-box{width:92%;padding:16px}
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-box">
+        <h1>Calculator</h1>
+        <input type="number" id="num1" placeholder="First number">
+        <input type="number" id="num2" placeholder="Second number">
+        <select id="operation">
+            <option value="add">Add</option>
+            <option value="sub">Subtract</option>
+            <option value="mul">Multiply</option>
+            <option value="div">Divide</option>
+        </select>
+        
+        <button onclick="calculate()">Calculate</button>
+        <div id="result"></div>
+    </div>
+
+<script>
+    function calculate() {
+    let num1 = Number(document.getElementById("num1").value);
+    let num2 = Number(document.getElementById("num2").value);
+    let operation = document.getElementById("operation").value;
+
+    let result;
+    
+        if (operation === "add"){
+        result = num1 + num2;
+        }
+        else if (operation === "sub"){
+        result = num1 - num2;
+        }
+        else if (operation === "mul"){
+        result = num1 * num2;
+        }
+        else if (operation === "div"){
+        if (num2 === 0){
+            alert("Cannot divide by zero");
+            return;
+        }
+        result = num1 / num2;
+        }
+
+    document.getElementById("result").textContent = result;
+    }
+</script>
+</body>
+</html>
